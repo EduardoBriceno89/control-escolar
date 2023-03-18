@@ -1,6 +1,6 @@
 require 'administrate/base_dashboard'
 
-class UserDashboard < Administrate::BaseDashboard
+class RoleDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,13 +9,11 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    email: Field::String,
-    password: Field::Password,
-    roles: Field::HasMany,
-    aula: Field::BelongsTo,
-    nombre: Field::String,
-    password_confirmation: Field::Password,
-    created_at: Field::Date
+    name: Field::String,
+    resource: Field::Polymorphic,
+    users: Field::HasMany,
+    created_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -25,29 +23,29 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    email
-    nombre
+    name
+    resource
+    users
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    email
-    nombre
+    name
+    resource
+    users
     created_at
+    updated_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    roles
-    nombre
-    email
-    password
-    password_confirmation
-    aula
+    name
+    resource
+    users
   ].freeze
 
   # COLLECTION_FILTERS
@@ -62,10 +60,10 @@ class UserDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how users are displayed
+  # Overwrite this method to customize how roles are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(user)
-    "#{user.nombre} - #{user.email}"
+  def display_resource(role)
+    role.name
   end
 end

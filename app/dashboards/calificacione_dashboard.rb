@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class UserDashboard < Administrate::BaseDashboard
+class CalificacioneDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,11 +9,9 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    email: Field::String,
-    password: Field::Password,
-    aula: Field::BelongsTo,
-    nombre: Field::String,
-    password_confirmation: Field::Password,
+    promedio: Field::String.with_options(searchable: false),
+    user: Field::BelongsTo,
+    asignatura: Field::BelongsTo,
     created_at: Field::Date
   }.freeze
 
@@ -24,16 +22,15 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    email
-    nombre
+    promedio
+    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    email
-    nombre
+    promedio
     created_at
   ].freeze
 
@@ -41,11 +38,9 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    nombre
-    email
-    password
-    password_confirmation
-    aula
+    user
+    asignatura
+    promedio
   ].freeze
 
   # COLLECTION_FILTERS
@@ -60,10 +55,10 @@ class UserDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how users are displayed
+  # Overwrite this method to customize how calificaciones are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(user)
-    user.nombre
-  end
+  # def display_resource(calificacione)
+  #   "Calificacione ##{calificacione.id}"
+  # end
 end

@@ -10,6 +10,6 @@ Role.create name: :estudiante
 Role.create name: :profesor
 Role.create name: :admin
 
-10.times do |i|
+8.times do |i|
   Modulo.create(modulo: i + 1)
 end

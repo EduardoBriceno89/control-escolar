@@ -1,12 +1,8 @@
 class PanelController < ApplicationController
   before_action :authenticate_user!, :verify_is_estudiante
   def index
-    if params[:modulo_id]
-      @modulo = Modulo.find(params[:modulo_id])
-      @calificaciones = @modulo.calificaciones
-    else
-      @calificaciones = Calificacione.all
-    end
+    @calificaciones = params[:modulo_id] ? Modulo.find(params[:modulo_id]).calificaciones : Calificacione.all
+    @promedio = @calificaciones.present? ? format('%.1f', @calificaciones.sum(:promedio) / @calificaciones.count.to_f) : 'No disponible'
   end
 
   def verify_is_estudiante

@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'panel#index'
+  namespace :admin do
+    resources :users
+    resources :aulas
+    resources :asignaturas
+    resources :calificaciones
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+    root to: 'users#index'
+  end
+  devise_for :users
+  devise_scope :user do
+    get 'login', to: 'devise/sessions#new'
+  end
 end

@@ -9,7 +9,6 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 Role.create name: :estudiante
-Role.create name: :profesor
 Role.create name: :admin
 
 8.times do |i|

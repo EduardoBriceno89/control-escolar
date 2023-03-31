@@ -3,7 +3,8 @@
 class PanelController < ApplicationController
   before_action :authenticate_user!, :verify_is_estudiante
   def index
-    @calificaciones = params[:modulo_id] ? Modulo.find(params[:modulo_id]).calificaciones : Calificacione.all
+    @calificaciones = params[:modulo_id] ? current_user.calificaciones.joins(:modulo).where(modulos: { id: params[:modulo_id] }) : current_user.calificaciones
+    
     @promedio = @calificaciones.present? ? format('%.2f', @calificaciones.sum(:promedio) / @calificaciones.count.to_f) : 'No disponible'
   end
 

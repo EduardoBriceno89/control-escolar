@@ -11,6 +11,11 @@
 Role.create name: :estudiante
 Role.create name: :admin
 
+User.create(nombre: 'Administrador', email: 'admin@mail.com', password: 'admin1234',
+            password_confirmation: 'admin1234') do |user|
+  user.add_role(:admin)
+end
+
 8.times do |i|
   Modulo.create(modulo: i + 1)
 end

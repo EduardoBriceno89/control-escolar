@@ -80,3 +80,4 @@ gem 'administrate', '~> 0.18.0'
 gem 'devise', '~> 4.9'
 
 gem 'rolify', '~> 6.0'
+gem 'rubycritic', require: false
